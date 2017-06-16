@@ -43,7 +43,9 @@
 						<repeat group="{{ @snolist }}" value="{{@sno }}">
 						<tr>
 							<td><a class="collection-item black-text view">{{ trim(@sno) }}</a></td>
-							<td><i class="material-icons left small">power_settings_new</i></td>
+							<td>
+								<i class="material-icons left small UPterracotta-text">power_settings_new</i>
+							</td>
 						</tr>
 						</repeat>
 					</table>
@@ -53,9 +55,9 @@
 
 		<!--Time record-->
 		<check if="{{@showTR}}">
-			<div class="col s8 offset-s1 grey lighten-2 z-depth-2">
+			<div class="col s8 offset-s1 blue lighten-5 z-depth-2">
 				<h5 >Time Record for {{ @snview }}</h5>
-				<table class="highlight responsive-table grey lighten-2">
+				<table class="highlight responsive-table blue lighten-5">
 					<thead class="">
 						<tr>
 							<th>Status</th>
@@ -65,7 +67,7 @@
 						</tr>
 					</thead>
 					
-					<tbody class="grey lighten-2">
+					<tbody class="blue lighten-5">
 
 						<repeat group="{{ @timerec }}" value="{{ @record }}">
 							<tr>
