@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>{{ @SITE }}</title>
+
+  <!-- CSS  -->
+  <link href="{{ @UI . 'icons/material-icons.css' }}" rel="stylesheet">
+  <link href="{{ @UI . 'css/materialize.css' }}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{{ @UI . 'css/style.css' }}" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+</head>
+<body class="main">
+
+	<!-- header-->
+	<div class="row-no-pad UPpula valign-wrapper z-depth-2">
+		<div class="col s1 "> <img width="115" src="ui/img/osa-logo.png"></div>
+		<div class="col s11 "><h1><span class="white-text">&nbsp;&nbsp;SA Portal</span></h1></div>
+	</div>
+	
+	<!-- login -->
+	<form action="insert_log" id="insert" method='POST'>
+		<div class="row UPluntian valign-wrapper z-depth-2">
+			<div class="col s4 white-text"><input placeholder="Student No." id="student_no" type="text" class="validate"></div>
+			<div class="col s8">
+				<a class="waves-effect waves-light btn UPginto z-depth-2" id="login">Log in/out <i class="material-icons left">input</i></a>
+			</div>
+		</div>
+	</form>
+	<br/>
+
+	<!-- panels -->
+	<div class="row">
+
+		<!--Student list-->
+		
+			<div class="col s2">
+				<h5>Student</h5>
+				<form action="view" id="viewTR" method="GET">
+					<input type="hidden" value="{{ @sno }}" id="hidden-sn" name="sn">
+					<table class="collection">
+						<repeat group="{{ @snolist }}" value="{{@sno }}">
+						<tr>
+							<td><a class="collection-item black-text view">{{ trim(@sno) }}</a></td>
+							<td><i class="material-icons left small">power_settings_new</i></td>
+						</tr>
+						</repeat>
+					</table>
+				</form>
+			</div>
+		
+
+		<!--Time record-->
+		<check if="{{@showTR}}">
+			<div class="col s8 offset-s1 grey lighten-2 z-depth-2">
+				<h5 >Time Record for {{ @snview }}</h5>
+				<table class="highlight responsive-table grey lighten-2">
+					<thead class="">
+						<tr>
+							<th>Status</th>
+							<th>Day</th>
+							<th>Year</th>
+							<th>Time</th>
+						</tr>
+					</thead>
+					
+					<tbody class="grey lighten-2">
+
+						<repeat group="{{ @timerec }}" value="{{ @record }}">
+							<tr>
+								<td>{{ @record[0] }}</td>
+								<td>
+									<!-- {{ @record[2] }} -->
+									<script>
+										switch({{ @record[2]}})
+										{
+											case 1: document.write("January"); break;
+											case 2: document.write("February"); break;
+											case 3: document.write("March"); break;
+											case 4: document.write("April"); break;
+											case 5: document.write("May"); break;
+											case 6: document.write("June"); break;
+											case 7: document.write("July"); break;
+											case 8: document.write("August"); break;
+											case 9: document.write("September"); break;
+											case 10: document.write("October"); break;
+											case 11: document.write("November"); break;
+											case 12: document.write("December");
+										}
+									</script>
+									{{@record[3]}}
+								</td>
+								<td>{{ @record[1]  }}</td>
+								<td>{{ @record[4] }}</td>
+							</tr>
+						</repeat>
+						
+					</tbody>
+				</table>
+			</div>
+		</check>
+	</div>
+
+  <!--  Scripts-->
+  <script src="{{ @UI . 'js/jquery.min.js' }}"></script>
+  <script src="{{ @UI . 'js/jquery-ui.min.js' }}"></script>
+  <script src="{{ @UI . 'js/materialize.js' }}"></script>
+  <script src="{{ @UI . 'js/init.js' }}"></script>
+  
+  
+	<script>
+	$('#login').click(function(){
+		$('#insert').submit();
+	});
+
+	$('.view').click(function(){
+		$('#hidden-sn').val($(this).html());
+		$('#viewTR').submit();
+	});
+	</script>
+  </body>
+</html>
