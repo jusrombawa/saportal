@@ -106,10 +106,9 @@ class SAController extends Controller
 	{
 		$this->f3->set('showTR',TRUE);
 		$sm = new SAMapper($this->db);
-		$student_number = $_GET['sn'];
-		//$student_number = '2009-04386'; //test case
+		//$student_number = $_GET['sn'];
+		$student_number = '2009-04386';
 		$this->f3->set('snview',$student_number);
-		//echo 'Student number: '.$student_number;
 		
 		//SELECT * FROM `log` WHERE sn=$student_number ORDER BY id DESC
 		$sm->load(array('sn = ?',$student_number), array('order'=>'id DESC'));
@@ -119,10 +118,7 @@ class SAController extends Controller
 			echo "failed to load student";
 		}
 
-
-
 		$timeRec = array();
-		$recSize = 0;
 
 		while(!$sm->dry()){
 
